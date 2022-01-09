@@ -26,6 +26,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import es.ull.passengers.Passenger;
+/**
+ * @author Ángel Emilio Capote Pérez
+ * @version 2.0
+*/
 
 public class Flight {
 
@@ -36,6 +40,11 @@ public class Flight {
     private static String flightNumberRegex = "^[A-Z]{2}\\d{3,4}$";
     private static Pattern pattern = Pattern.compile(flightNumberRegex);
 
+    /**
+     * Constructor de la clase flight
+     * @param flightNumber número del vuelo
+     * @param seats número de asientos
+     */
     public Flight(String flightNumber, int seats) {
         Matcher matcher = pattern.matcher(flightNumber);
         if (!matcher.matches()) {
@@ -45,14 +54,27 @@ public class Flight {
         this.seats = seats;
     }
 
+    /**
+     *
+     * @return Retorna el número de vuelo
+     */
     public String getFlightNumber() {
         return flightNumber;
     }
 
+    /**
+     *
+     * @return Retorna el número de pasajeros
+     */
     public int getNumberOfPassengers() {
         return passengers.size();
     }
 
+    /**
+     * Añade un pasajero a la lista
+     * @param passenger pasajero
+     * @return pasajero añadido
+     */
     public boolean addPassenger(Passenger passenger) {
         if (getNumberOfPassengers() >= seats) {
             throw new RuntimeException("Not enough seats for flight " + getFlightNumber());
@@ -61,6 +83,11 @@ public class Flight {
         return passengers.add(passenger);
     }
 
+    /**
+     * Elimina un pasajero de la lista
+     * @param passenger pasajero
+     * @return pasajero eliminado
+     */
     public boolean removePassenger(Passenger passenger) {
         passenger.setFlight(null);
         return passengers.remove(passenger);
